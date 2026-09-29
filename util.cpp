@@ -13,18 +13,31 @@ std::string convToLower(std::string src)
 
 /** Complete the code to convert a string containing a rawWord
     to a set of words based on the criteria given in the assignment **/
+/*sth went wrong..
+>>>>>>>>>size should stt with 0
+then can read the first word and fitering them
+*/
 std::set<std::string> parseStringToWords(string rawWords)
 {
+    set<string> words;
+    string currentWord;
 
+    for(size_t i=0;i<rawWords.size();++i) // devide line
+    {
+        unsigned char ch = static_cast<unsigned char>(rawWords[i]);
 
+        if(ispunct(ch)||isspace(ch)) // ele space and punctuation / from cctype
+        {
+            if(currentWord.size() >= 2) words.insert(currentWord); //ele size 1 word
+            currentWord.clear();
+        }
+        else currentWord += static_cast<char>(tolower(ch)); // make all lowercase
+        //char > unsigned char > char
+    }
 
+    if(currentWord.size() >= 2) words.insert(currentWord); //if there's no punc or space, we can put that one word in here
 
-
-
-
-
-
-
+    return words;
 }
 
 /**************************************************
